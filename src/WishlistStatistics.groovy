@@ -13,7 +13,11 @@ def itemNum = 0
 //read
 new File( args[0] ).eachLine{ l->
 	def sp = l.split(/\t/)
-	def n = sp[0]
+	if( sp.size() != 3 ){
+		println l+" "+sp
+		return
+	}
+	def n = sp[0].replaceAll(/\p{C}/,'')
 	def u = sp[1]
 
 	itemCount[ n ]++
