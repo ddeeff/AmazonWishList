@@ -129,7 +129,7 @@ class AmazonWishGetter {
 	}
 
 	def getFormattedItemName( String n ){
-		return n.replaceAll(/\?/, '')
+		return n.replaceAll(/\p{C}/, '')
 	}
 }
 
