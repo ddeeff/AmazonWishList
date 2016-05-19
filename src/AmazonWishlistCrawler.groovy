@@ -74,7 +74,7 @@ class AmazonWishGetter {
 	List getWishItems( String url, int pageNum = 1 ){
 		sleep( SLEEP_TIME ) // sleep for peace ;)
 
-		def accessUrl = url + "?page="+pageNum
+		def accessUrl = url + "&page="+pageNum
 
 		println "ItemPage : "+accessUrl
 
@@ -101,6 +101,7 @@ class AmazonWishGetter {
 					def formattedTitle = getFormattedItemName( title )
 					ret += [[ formattedTitle, itemUrl, url ]]	//itemName, itemUrl, userUrl
 				}
+				println "$title $itemUrl"
 
 			}
 
@@ -147,7 +148,7 @@ def mainProcess(){
 	new File(/SearchWords.txt/).eachLine{
 		words += enc( it )
 	}
-	println "Search words are "+words.collectAll( dec )
+	println "Search words are "+words.collect( dec )
 
 	//get wishlists
 	wishlistUrls = []
@@ -163,7 +164,7 @@ def mainProcess(){
 
 	//output wishlist
 	new File( "out_WishlistUrl_"+dateStr+".txt" ).withWriter{ w->
-		w.println "Search words are "+words.collectAll( dec )
+		w.println "Search words are "+words.collect( dec )
 		wishlistUrlsUniq.each{
 			w.println( it )
 		}
